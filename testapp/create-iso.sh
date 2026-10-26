@@ -2,4 +2,4 @@
 
 set -ex
 
-genisoimage -o testapps.iso -input-charset utf-8 testapp_c.exe testapp_cpp.exe
+genisoimage -o testapps.iso -J -input-charset utf-8 tst_cpp.exe tst_c.exe
