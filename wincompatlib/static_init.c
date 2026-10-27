@@ -21,7 +21,7 @@ static const int EPOCH_BASE = INT_MIN;
  * has to stay here too...
 */
 int _Init_global_epoch = EPOCH_BASE;
-__declspec(thread) int _Init_thread_epoch = EPOCH_BASE;
+_Thread_local int _Init_thread_epoch = EPOCH_BASE;
 
 static pthread_mutex_t _Init_thread_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t _Init_thread_cond = PTHREAD_COND_INITIALIZER;
