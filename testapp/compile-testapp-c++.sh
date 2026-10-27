@@ -2,7 +2,7 @@
 
 set -ex
 
-$LLVM_MINGW/bin/clang++ \
+$LLVM_MINGW_XP/bin/clang++ \
   -target i686-pc-windows-gnu \
   -D_WIN32_WINNT=0x0501 \
   -DWINVER=0x0501 \
