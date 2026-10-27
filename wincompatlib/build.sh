@@ -25,7 +25,22 @@ compile()
 	)
 }
 
+assemble()
+{
+	(
+		set -x
+
+		"$LLVM_MINGW_XP/bin/clang" \
+			-target i686-pc-windows-gnu \
+			-march=pentium-mmx \
+			-c "$1"
+	)
+}
+
 compile winnt_40.cpp
 compile winnt_50.cpp
 compile winnt_51.cpp
 compile static_init.c
+assemble winnt_40_forwarders.asm
+assemble winnt_50_forwarders.asm
+assemble winnt_51_forwarders.asm
