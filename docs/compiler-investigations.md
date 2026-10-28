@@ -125,3 +125,24 @@ Based on Colin Finck's two blog posts on the topics of how to compile modern C/C
 Additionally, the [libnt5](https://github.com/Alex313031/libnt5) fork of EnlyzeWinCompatLib appears to add in some extra calls missing from the original, so it may be worth integrating these as well.
 
 I _think_ that the custom libc++/winpthreads projects used in EnlyzeWinCompatLib are because Colin wanted to be able to build everything directly in Visual Studio. I have no such limitation (CMake is more portable anyway), so I hope we can just pull in the LLVM source tree, set it up to cross-compile as per what llvm-mingw does, and configure it to use winpthreads.
+
+One unresolved question I have at time of writing is whether the llvm-mingw-xp toolchain might actually solve the issues that the above custom libc++ is required for. It may be that one of the problems llvm-mingw-xp addresses is the same problem that Colin is trying to solve, and if so, we could get away with not having to rebuild libc++. This would just leave EnlyzeWinCompatLib, which is needed to support missing msvcrt functions that newer programs require.
+
+Looking at [the diff](https://github.com/mstorsjo/llvm-mingw/compare/master...mon:llvm-mingw-xp:master), it appears this might well be the case. winpthreads is certainly being used! One thing I did notice, though, is that the toolchain is patched to specifically support Windows XP:
+
+```
+diff --git a/mingw-w64-headers/include/sdkddkver.h b/mingw-w64-headers/include/sdkddkver.h
+index ee1ef33e2..7338b44ea 100644
+--- a/mingw-w64-headers/include/sdkddkver.h
++++ b/mingw-w64-headers/include/sdkddkver.h
+@@ -184,7 +184,7 @@
+ #   define NTDDI_VERSION WDK_NTDDI_VERSION
+ #  endif
+ # else
+-#  define NTDDI_VERSION NTDDI_WS03
++#  define NTDDI_VERSION NTDDI_WINXP
+ # endif
+ #endif
+```
+
+If we want to go back as far as NT 4.0, as EnlyzeWinCompatLib should allow us to, we may need to change this.
