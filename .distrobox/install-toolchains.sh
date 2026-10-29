@@ -25,7 +25,8 @@ install_toolchain()
 	cd "$HOME"
 
 	if [[ -d "./${FILE_STEM}" ]]; then
-		rm -rf "./${FILE_STEM}"
+		echo "Not installing ${TOOLCHAIN_NAME} as a directory for it already exists"
+		return
 	fi
 
 	wget "$URL"
