@@ -4,6 +4,7 @@ set -ex
 
 $LLVM_MINGW_XP/bin/clang \
   -target i686-pc-windows-gnu \
+  "--sysroot=${LLVM_MINGW_XP}" \
   -D_WIN32_WINNT=0x0501 \
   -DWINVER=0x0501 \
   -DNTDDI_VERSION=0x05010000 \
@@ -15,6 +16,7 @@ $LLVM_MINGW_XP/bin/clang \
 
 $LLVM_MINGW_XP/bin/clang++ \
   -target i686-pc-windows-gnu \
+  "--sysroot=${LLVM_MINGW_XP}" \
   -D_WIN32_WINNT=0x0501 \
   -DWINVER=0x0501 \
   -DNTDDI_VERSION=0x05010000 \

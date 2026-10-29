@@ -19,10 +19,10 @@ compile()
 		# and https://github.com/Alex313031/libnt5/blob/msvc-v141-xp/BUILD.gn
 		"$LLVM_MINGW_XP/bin/$compiler" \
 			-target i686-pc-windows-gnu \
+			"--sysroot=${LLVM_MINGW_XP}" \
 			-fno-exceptions \
 			-flto \
 			-march=pentium-mmx \
-			"-isystem${LLVM_MINGW_XP}/i686-w64-mingw32/include" \
 			-c "$1"
 	)
 }
@@ -34,6 +34,7 @@ assemble()
 
 		"$LLVM_MINGW_XP/bin/clang" \
 			-target i686-pc-windows-gnu \
+			"--sysroot=${LLVM_MINGW_XP}" \
 			-march=pentium-mmx \
 			-c "$1"
 	)
@@ -44,7 +45,7 @@ link()
 	(
 		set -x
 
-		"$LLVM_MINGW_XP/bin/llvm-ar" rcs wincompatlib.a $*
+		"$LLVM_MINGW_XP/bin/llvm-ar" rcs libwincompatlib.a $*
 	)
 }
 
