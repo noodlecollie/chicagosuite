@@ -8,7 +8,7 @@ set -ex
 	-fno-exceptions \
 	-march=pentium-mmx \
 	-municode \
-	-I../wincompatlib \
+	-I../02_wincompatlib \
 	-c test.cpp \
 	-static
 
@@ -24,7 +24,7 @@ set -ex
 	-flto \
 	-fuse-ld=lld \
 	-march=pentium-mmx \
-	-L../wincompatlib \
+	-L../02_wincompatlib \
 	-lwincompatlib \
 	-lcomctl32 \
 	-static \
