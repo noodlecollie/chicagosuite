@@ -31,4 +31,8 @@ set -ex
 	test.o \
 	-o wincompatlib_test.exe
 
-genisoimage -o wincompatlib_test.iso -J -input-charset utf-8 wincompatlib_test.exe
+genisoimage -o wincompatlib_test.iso \
+  -J \
+  -R \
+  -input-charset utf-8 \
+  wincompatlib_test.exe
